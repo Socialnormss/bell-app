@@ -1,14 +1,36 @@
+/* ==========================================
+   Bell — Disney Princess CI
+   palette: soft rose · cream · gold · deep plum text
+   ========================================== */
+
 :root {
-  --bg: #111111;
-  --bg-card: #1a1a1a;
-  --bg-input: #0a0a0a;
-  --border: #2a2a2a;
-  --text: #ffffff;
-  --text-dim: #a8a8a8;
-  --accent: #C87941;
-  --accent-hover: #d68a52;
-  --green: #4caf50;
-  --radius: 14px;
+  /* backgrounds */
+  --bg: #FFF5F0;           /* warm cream (page) */
+  --bg-card: #FFFFFF;      /* white card */
+  --bg-input: #FFF0F2;     /* blush input */
+  --bg-prompt: #FAF3FA;    /* lavender mist for prompt */
+
+  /* borders / dividers */
+  --border: #F5D4D9;       /* soft pink border */
+  --border-strong: #E8B4BD;
+
+  /* text — strong contrast (AAA on cream) */
+  --text: #2D1B3D;         /* deep plum, 13:1 contrast */
+  --text-soft: #5C4565;    /* muted plum, 7:1 contrast */
+  --text-dim: #8A7591;     /* dimmest, 4.7:1 (only for labels) */
+
+  /* brand accents */
+  --rose: #E8748E;         /* primary rose pink */
+  --rose-hover: #D85F7B;
+  --rose-soft: #FDE2E7;
+  --gold: #D4A574;         /* soft princess gold */
+  --gold-dark: #B8895A;
+  --sage: #7FB069;         /* success green */
+
+  /* shape */
+  --radius: 18px;
+  --shadow: 0 4px 20px rgba(232, 116, 142, 0.12);
+  --shadow-hover: 0 6px 24px rgba(232, 116, 142, 0.22);
 }
 
 * { box-sizing: border-box; }
@@ -17,10 +39,14 @@ html, body {
   margin: 0;
   padding: 0;
   background: var(--bg);
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(232, 116, 142, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(212, 165, 116, 0.10) 0%, transparent 40%);
+  background-attachment: fixed;
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Noto Sans Thai", "Sukhumvit Set", sans-serif;
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -33,52 +59,73 @@ body {
 
 /* ---------- topbar ---------- */
 .topbar {
-  padding: 20px 18px 8px;
+  padding: 24px 20px 12px;
+  position: relative;
 }
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .brand .dot {
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
   border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(232, 116, 142, 0.3);
+  font-size: 18px;
+}
+.brand .dot::after {
+  content: "👑";
 }
 .brand h1 {
   margin: 0;
-  font-size: 26px;
-  letter-spacing: 0.5px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .brand .tag {
   font-size: 13px;
-  color: var(--text-dim);
+  color: var(--text-soft);
   margin-left: auto;
+  font-weight: 500;
 }
 
 /* ---------- tabs ---------- */
 .tabs {
   display: flex;
-  gap: 6px;
-  padding: 8px 18px 0;
-  border-bottom: 1px solid var(--border);
+  gap: 8px;
+  padding: 8px 16px 0;
+  margin: 0 4px;
+  border-bottom: 2px solid var(--border);
 }
 .tab {
   flex: 1;
   background: transparent;
   border: none;
-  color: var(--text-dim);
-  padding: 12px 6px;
+  color: var(--text-soft);
+  padding: 14px 6px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.18s, border-color 0.18s;
+  font-family: inherit;
+}
+.tab:hover {
+  color: var(--rose);
 }
 .tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  color: var(--rose);
+  border-bottom-color: var(--rose);
 }
 
 /* ---------- main / features ---------- */
@@ -88,7 +135,7 @@ main {
 .feature {
   display: none;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 .feature.active {
   display: flex;
@@ -99,7 +146,12 @@ main {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: var(--shadow-hover);
 }
 .card.hidden {
   display: none;
@@ -107,44 +159,53 @@ main {
 .card-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 .card-head h2 {
   margin: 0;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
   flex: 1;
 }
 .step {
-  width: 26px;
-  height: 26px;
-  background: var(--accent);
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
   color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(232, 116, 142, 0.4);
+  flex-shrink: 0;
 }
 
 /* ---------- inputs ---------- */
 textarea {
   width: 100%;
-  min-height: 140px;
+  min-height: 150px;
   background: var(--bg-input);
   color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
   font: inherit;
   font-size: 15px;
   resize: vertical;
   outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+textarea::placeholder {
+  color: var(--text-dim);
+  opacity: 0.7;
 }
 textarea:focus {
-  border-color: var(--accent);
+  border-color: var(--rose);
+  background: #FFFFFF;
 }
 
 /* ---------- buttons ---------- */
@@ -153,96 +214,128 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 12px 18px;
+  padding: 14px 22px;
   border: none;
-  border-radius: 10px;
+  border-radius: 14px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s, transform 0.05s;
-  margin-top: 12px;
+  transition: transform 0.06s, box-shadow 0.2s, filter 0.15s;
+  margin-top: 14px;
   font-family: inherit;
+  letter-spacing: 0.2px;
 }
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 .btn.primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-hover) 100%);
   color: #fff;
   width: 100%;
+  box-shadow: 0 4px 14px rgba(232, 116, 142, 0.4);
 }
 .btn.primary:hover {
-  background: var(--accent-hover);
+  filter: brightness(1.05);
+  box-shadow: 0 6px 18px rgba(232, 116, 142, 0.5);
 }
 .btn.ghost {
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 6px 12px;
+  background: var(--rose-soft);
+  color: var(--rose-hover);
+  border: 1.5px solid var(--rose);
+  padding: 8px 14px;
   font-size: 13px;
   margin-top: 0;
+  font-weight: 700;
+}
+.btn.ghost:hover {
+  background: var(--rose);
+  color: #fff;
 }
 
 /* ---------- prompt box ---------- */
 .prompt-box {
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  font-family: "SF Mono", Menlo, Consolas, monospace;
-  font-size: 13px;
+  background: var(--bg-prompt);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: "SF Mono", Menlo, Consolas, "Noto Sans Thai", monospace;
+  font-size: 13.5px;
   white-space: pre-wrap;
   word-wrap: break-word;
   margin: 0;
-  max-height: 280px;
+  max-height: 300px;
   overflow-y: auto;
-  color: var(--text-dim);
+  color: var(--text-soft);
+  line-height: 1.65;
 }
 .hint {
-  margin: 0 0 10px;
-  font-size: 13px;
-  color: var(--text-dim);
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+  font-weight: 500;
 }
 .hint b {
-  color: var(--accent);
+  color: var(--rose-hover);
+  font-weight: 700;
 }
 
 /* ---------- result ---------- */
 .result {
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.7;
+  color: var(--text);
 }
 .result h3 {
-  color: var(--accent);
-  margin: 18px 0 8px;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  color: var(--rose-hover);
+  margin: 20px 0 10px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
+  padding-bottom: 6px;
+  border-bottom: 2px dotted var(--border-strong);
 }
 .result h3:first-child {
   margin-top: 0;
 }
+.result h3::before {
+  content: "✨ ";
+}
 .result ul {
   margin: 0;
-  padding-left: 20px;
+  padding-left: 22px;
 }
 .result li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.result li::marker {
+  color: var(--rose);
 }
 .result p {
-  margin: 6px 0;
+  margin: 8px 0;
+  color: var(--text);
 }
 .result strong {
-  color: var(--accent);
+  color: var(--gold-dark);
+  font-weight: 700;
 }
 
 /* ---------- footer ---------- */
 footer {
   text-align: center;
-  padding: 30px 18px;
-  color: var(--text-dim);
-  font-size: 12px;
+  padding: 36px 18px;
+  color: var(--text-soft);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+footer::before {
+  content: "✿ ";
+  color: var(--rose);
+}
+footer::after {
+  content: " ✿";
+  color: var(--rose);
 }
 
 /* ---------- toast ---------- */
@@ -251,28 +344,40 @@ footer {
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%) translateY(80px);
-  background: var(--green);
+  background: linear-gradient(135deg, var(--sage) 0%, #5fa050 100%);
   color: #fff;
-  padding: 10px 18px;
+  padding: 12px 22px;
   border-radius: 30px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   opacity: 0;
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.22s, transform 0.22s;
   pointer-events: none;
   z-index: 100;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 20px rgba(127, 176, 105, 0.45);
 }
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
+/* ---------- sparkle anim ---------- */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.brand .dot {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+
 /* ---------- mobile tweaks ---------- */
 @media (max-width: 480px) {
-  .brand h1 { font-size: 22px; }
+  .brand h1 { font-size: 24px; }
+  .brand .dot { width: 32px; height: 32px; font-size: 16px; }
   .brand .tag { font-size: 12px; }
-  .tab { font-size: 13px; }
-  textarea { min-height: 120px; font-size: 16px; } /* 16px = no iOS zoom */
+  .tab { font-size: 13px; padding: 12px 4px; }
+  textarea { min-height: 130px; font-size: 16px; } /* 16px = no iOS zoom */
   main { padding: 14px; }
+  .card { padding: 16px; }
+  .card-head h2 { font-size: 17px; }
 }
