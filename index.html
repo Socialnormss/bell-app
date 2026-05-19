@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Bell — AI ผู้ช่วยเซลส์</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <h1>Bell</h1>
+    <span class="tag">AI ช่วยงานเซลส์</span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="f1" role="tab">📝 สรุปประชุม</button>
+  <button class="tab" data-tab="f2" role="tab">🎬 Production Brief</button>
+</nav>
+
+<main>
+
+  <!-- ============ Feature 1 ============ -->
+  <section id="f1" class="feature active">
+
+    <div class="card">
+      <div class="card-head">
+        <span class="step">1</span>
+        <h2>วาง Meeting Notes</h2>
+      </div>
+      <textarea id="f1-input" placeholder="วาง notes จากประชุมที่นี่ (พิมพ์เองก็ได้ ไม่ต้องเรียบ)
+ตัวอย่าง:
+ลูกค้า ABC อยากได้ campaign IG/TikTok เดือนหน้า
+คุณเอ ทำ creative ส่งศุกร์
+budget 500K..."></textarea>
+      <button class="btn primary" id="f1-build">⚡ สร้าง Prompt</button>
+    </div>
+
+    <div class="card hidden" id="f1-prompt-card">
+      <div class="card-head">
+        <span class="step">2</span>
+        <h2>Copy Prompt → ส่งให้ AI</h2>
+        <button class="btn ghost copy" data-copy="f1-prompt">📋 Copy</button>
+      </div>
+      <p class="hint">วางใน <b>Claude.ai</b> / <b>ChatGPT</b> ฟรี — ได้คำตอบกลับมาแล้วเอามาวางในช่อง 3</p>
+      <pre id="f1-prompt" class="prompt-box"></pre>
+    </div>
+
+    <div class="card hidden" id="f1-output-card">
+      <div class="card-head">
+        <span class="step">3</span>
+        <h2>วางคำตอบจาก AI</h2>
+      </div>
+      <textarea id="f1-output" placeholder="วางคำตอบจาก Claude/ChatGPT ที่นี่..."></textarea>
+      <button class="btn primary" id="f1-format">✨ จัด Format</button>
+    </div>
+
+    <div class="card hidden" id="f1-result-card">
+      <div class="card-head">
+        <span class="step">4</span>
+        <h2>สรุปพร้อมใช้</h2>
+        <button class="btn ghost copy" data-copy-text="f1-result">📋 Copy ทั้งหมด</button>
+      </div>
+      <div id="f1-result" class="result"></div>
+    </div>
+
+  </section>
+
+  <!-- ============ Feature 2 ============ -->
+  <section id="f2" class="feature">
+
+    <div class="card">
+      <div class="card-head">
+        <span class="step">1</span>
+        <h2>วาง Draft / Proposal</h2>
+      </div>
+      <textarea id="f2-input" placeholder="วาง draft brief / proposal / ไอเดียที่จะส่งให้ production
+ตัวอย่าง:
+ลูกค้าอยากได้คลิปแนะนำสินค้าใหม่ ลง IG + TikTok
+มี budget 200K
+ส่งงาน 2 สัปดาห์..."></textarea>
+      <button class="btn primary" id="f2-build">⚡ สร้าง Prompt</button>
+    </div>
+
+    <div class="card hidden" id="f2-prompt-card">
+      <div class="card-head">
+        <span class="step">2</span>
+        <h2>Copy Prompt → ส่งให้ AI</h2>
+        <button class="btn ghost copy" data-copy="f2-prompt">📋 Copy</button>
+      </div>
+      <p class="hint">วางใน <b>Claude.ai</b> / <b>ChatGPT</b> ฟรี — เอาคำตอบกลับมาวางช่อง 3</p>
+      <pre id="f2-prompt" class="prompt-box"></pre>
+    </div>
+
+    <div class="card hidden" id="f2-output-card">
+      <div class="card-head">
+        <span class="step">3</span>
+        <h2>วางคำตอบจาก AI</h2>
+      </div>
+      <textarea id="f2-output" placeholder="วางคำตอบจาก Claude/ChatGPT ที่นี่..."></textarea>
+      <button class="btn primary" id="f2-format">✨ จัด Format</button>
+    </div>
+
+    <div class="card hidden" id="f2-result-card">
+      <div class="card-head">
+        <span class="step">4</span>
+        <h2>Production Brief พร้อมส่ง</h2>
+        <button class="btn ghost copy" data-copy-text="f2-result">📋 Copy ทั้งหมด</button>
+      </div>
+      <div id="f2-result" class="result"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <span>Bell V1 · made by Norms</span>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
